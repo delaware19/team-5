@@ -2,25 +2,38 @@
 
 {% block content %}
 <form action="{{ url_for('query_story') }}" method="post">
-    <input type="text" name="Name">
-    <select name="Age Group">
-      <option>0-4</option>
-      <option>5-12</option>
-      <option>12-15</option>
-      <option>16+</option>
-    </select>
-    <select name="Gender">
-      <option>Male</option>
-      <option>Female</option>
-      <option>Other</option>
-    </select>
-    <select name="Treatment">
-      <option>X-Ray</option>
-      <option>Check-in</option>
-      <option>Blood Work</option>
-      <option>Whatever else..</option>
-    </select>
-    <input type="submit">
+    <div class="form-group">
+        <input type="text" name="Name" class="form-control" placeholder="Enter name">
+        <small id="nameHelp" class="form-text text-muted">We'll never share this information to anyone else.</small>
+    </div>
+    <div class="form-group">
+        <select class="form-control" name="Age Group">
+          <!--option selected disabled>Age Range</option-->
+          <option>0-4</option>
+          <option>5-12</option>
+          <option>12-15</option>
+          <option>16+</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <select class="form-control" name="Gender">
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <select class="form-control" name="Treatment">
+          <option>X-Ray</option>
+          <option>Check-in</option>
+          <option>Blood Work</option>
+          <option>Whatever else..</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>
 
