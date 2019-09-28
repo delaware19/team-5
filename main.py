@@ -5,6 +5,7 @@ from flask import g
 DATABASE = '/Users/ryan_emenheiser/Desktop/CodeForGood/team-5/c4gDataBase.db'
 app = Flask(__name__)
 
+
 @app.route("/")
 def home():
     return render_template("home.html", title="Home Page")
@@ -15,14 +16,20 @@ def create_stories():
     return render_template("admin_create_story.html")  # todo possible html path for creating admin stories
 
 
-@app.route("/login")
+@app.route("/login", methods=["POST"])
 def login():
-    return render_template("login.html", login = "login")
+    return render_template("login.html", login="login")
 
 
-@app.route("/view")
-def view_stories():
-    return render_template("findStories.html")  # todo possible html path
+@app.route("/find")
+def find_stories():
+    return render_template("findStories.html")
+
+
+@app.route("/story", methods=["POST"])
+def query_story():
+    # todo querying the database via POST request
+    return render_template("story.html", story='database_story')
 
 
 # Gain access to db
@@ -41,4 +48,3 @@ def close_database(exception):
 
 if __name__ == "__main__":
     app.run()
-
