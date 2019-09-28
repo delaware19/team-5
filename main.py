@@ -1,5 +1,9 @@
 import sqlite3
 from flask import Flask, render_template, request
+<<<<<<< HEAD
+=======
+import werkzeug
+>>>>>>> 7fff5e98d7cc6e6ccb6483af3df00d322974451e
 from flask import g
 import sqlite3
 
@@ -41,6 +45,14 @@ def find_stories():
 def read_stories():
     return render_template("readStories.html")
 
+# for uploading an image from the admin's gallery
+@app.route('/uploader', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['file']
+        f.save(werkzeug.secure_filename(f.filename))
+        return 'file uploaded successfully'
+
 
 @app.route("/story", methods=["POST"])
 def query_story():
@@ -78,4 +90,4 @@ def close_database(exception):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
