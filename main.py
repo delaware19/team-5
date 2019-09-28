@@ -1,24 +1,10 @@
 import sqlite3
 from flask import Flask, render_template, request
-<<<<<<< HEAD
-=======
 import werkzeug
->>>>>>> 7fff5e98d7cc6e6ccb6483af3df00d322974451e
 from flask import g
-import sqlite3
 
 DATABASE = '/Users/ryan_emenheiser/Desktop/CodeForGood/team-5/c4gDataBase.db'
 app = Flask(__name__)
-connection = sqlite3.connect("c4gDataBase.db")
-cursor = connection.cursor()
-
-# sql_command = """
-# SELECT *
-# FROM Story, Text WHERE STORY.STORY_ID = "Ryan210";
-# """
-# response = cursor.execute(sql_command)
-# print(response)
-# connection.close()
 
 
 @app.route("/")
@@ -56,23 +42,8 @@ def upload_file():
 
 @app.route("/story", methods=["POST"])
 def query_story():
-
-    connection = sqlite3.connect("c4gDataBase.db")
-    cursor = connection.cursor()
-
-    sql_command = """
-    SELECT *
-    FROM Story, Text WHERE STORY.STORY_ID = "Ryan40";
-    """
-    response = cursor.execute(sql_command)
-    #connection.close()
     # todo querying the database via POST request
-    name = request.form["Name"]
-    age_group = request.form["Age Group"]
-    gender = request.form["Gender"]
-    treatment = request.form["Treatment"]
-
-    return render_template("storyResult.html", name = name, age_group = age_group, gender = gender, treatment = treatment, response = response.fetchall())
+    return render_template("story.html", story='database_story')
 
 
 # Gain access to db
