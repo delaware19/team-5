@@ -11,7 +11,7 @@ def home():
     return render_template("home.html", title="Home Page")
 
 
-@app.route("/create/stories")
+@app.route("/create/stories", methods=["POST"])
 def create_stories():
     return render_template("createStories.html")  # todo possible html path for creating admin stories
 
