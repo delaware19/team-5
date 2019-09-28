@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, json
 import werkzeug
 from flask import g
 
@@ -112,7 +112,15 @@ def query_story():
     response = response.fetchall()
     result = parseText(response[0][0])
     # return render_template("storyResult.html", name = name, age_group = age_group, gender = gender, treatment = treatment, response = response.fetchall())
-    return render_template("readStories.html", response = result)
+    #seperator = ' , '
+    #result = seperator.join
+
+    response=""
+    for item in result:
+        response+="\n"
+        response+=item
+
+    return render_template("readStories.html", response = response)
 
 # Gain access to db
 def get_database():
