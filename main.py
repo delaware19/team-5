@@ -1,7 +1,7 @@
 import sqlite3
 from flask import Flask, render_template
 
-DATABASE = '/path/to/database.db'
+DATABASE = '/Users/ryan_emenheiser/Desktop/CodeForGood/team-5/c4gDataBase.db'
 app = Flask(__name__)
 
 

@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<p> Welcome to the home page </p>
+{% extends "layout.html" %}
 
-</body>
-</html>
+{% block content %}
+	<title> Welcome Page </title>
+	<div class="container">
+	  <h2> Nemours Center for Autism - Social Stories App </h2>
+	  <div class="panel panel-default">
+	    <div class="panel-body"> Instructions on how to use app.....</div>
+  	</div>
+
+  	<button type="button" class="btn btn-primary"> Find Stories </button>
+  	<button type="button" class="btn btn-primary"> Login </button>
+
+
+{% endblock content %}
