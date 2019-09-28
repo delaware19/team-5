@@ -1,0 +1,22 @@
+<% extends "layout.html" %>
+
+<div class='col-sm-5'>
+    <form method="POST" action="/auth/login">
+        <div class="form-group">
+            <label class="sr-only" for="email">Email</label>
+            <input class='form-control' type="text" id="email" name="email" maxlength="255" placeholder="Email or Username" />
+        </div>
+
+        <div class="form-group">
+            <label class="sr-only" for="password">Password</label>
+            <input class='form-control' type="password" id="password" name="password" maxlength="255" placeholder="Password"/>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+                Login<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+            </button>
+        </div>
+    </form>
+    <p>Don't have an account yet? <a href='/auth/register'>Register here</a>.</p>
+</div>
