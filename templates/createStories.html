@@ -39,13 +39,32 @@
     </textarea>
   </div>
 <!--  todo temporarily placed for the functionality can be moved for actual story creation page-->
+  <h1>Narrative</h1>
+  <button class="btn btn-success">Add text block</button>
+  <button class="btn btn-success">Add part of speech</button>
+  <button class="btn btn success">Insert Image</button>
 
-  <form action = "/uploader" method = "POST" enctype = "multipart/form-data">
-         <input type = "file" name = "file" class="form-control"/>
-         <!--TODO: Is the input of this supposed to be submit, cant this be submitted at the same
-         time as the form? also form inside of a form-->
-         <input type = "submit" class="form-control"/>
-  </form>
+  <div class="form-group">
+    <textarea class="form-control" id="story0" rows="4">
+      Having blood drawn means that a nurse will take a little bit of blood from
+    </textarea>
+  </div>
+
+  <div class="form-group">
+    <input type="speech" class="form-control" id="ptspeech0" placeholder="Patient's Name">
+  </div>
+
+  <div class="form-group">
+    <textarea class="form-control" id="story0" rows="4">
+      's arm. Whenever blood is drawn, there are steps that people follow. This story will show you all the steps of having blood drawn.
+    </textarea>
+  </div>
+
+  <img src="/static/sophie.png" alt="Sophie and her Mom"/> <!--style="width:186px;height:53px;"-->
+
+
+
+
   <br>
   <button type="submit" class="btn btn-primary"> Create Story </button>
   <a href="/" class="btn btn-success">Return to Home</a>
