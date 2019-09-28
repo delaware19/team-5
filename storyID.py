@@ -1,9 +1,11 @@
-name = "Ryan"
-age = 4
-gender = "Male"
+n = "Ryan"
+a = 4
+g = "Male"
 
 #we need a different key system
-def makeStoryID(n, a, g):
+
+#will make the storyID for the database 
+def makeStoryID(name, age, gender):
     sID = name + str(age)
     if gender.upper() == "MALE":
         sID += "0"
@@ -14,4 +16,4 @@ def makeStoryID(n, a, g):
     
     return sID
 
-print(makeStoryID(name, age, gender))
+print(makeStoryID(n, a, g))
