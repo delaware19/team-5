@@ -4,7 +4,7 @@ from flask import g
 
 DATABASE = '/Users/ryan_emenheiser/Desktop/CodeForGood/team-5/c4gDataBase.db'
 app = Flask(__name__)
-:
+
 @app.route("/")
 def home():
     return render_template("home.html", title="Home Page")
