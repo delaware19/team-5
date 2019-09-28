@@ -97,6 +97,7 @@ def query_story():
     age_group = request.form["Age Group"]
     gender = request.form["Gender"]
     treatment = request.form["Treatment"]
+   # image = request.form["Image"]
 
     sID = name + age_group[0]
     if gender.upper() == "MALE":
