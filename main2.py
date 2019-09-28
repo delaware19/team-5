@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 import werkzeug
 from flask import g
 
@@ -7,6 +7,52 @@ DATABASE = '/Users/ryan_emenheiser/Desktop/CodeForGood/team-5/c4gDataBase.db'
 app = Flask(__name__)
 connection = sqlite3.connect("c4gDataBase.db")
 cursor = connection.cursor()
+
+#possible issue if the split string does not exist will not work
+#  however, if these are the functions used should not be an issue
+
+#takes in the the string of TEXT_CAPTIONS and will turn it into an array
+#  that can be traversed for each of the story "pages" to put the correct
+#  text per story "page"
+def parseText(textStr):
+    textArr = textStr.split(" ### ")
+    
+    return textArr
+
+#takes in the array of TEXT_CAPTIONS and will turn it into a string that
+#  is saved into the database, and is parsed by parseText
+def translateText(textArr):
+    textStr = ""
+    for i in range(len(textArr)):
+        textStr += str(textArr[i]) + " ### "
+        
+    return textStr
+
+#takes in the the string of IMAGE_LIST and will turn it into an array
+#  that can be traversed for each of the story "pages" to put the correct
+#  image per story "page"
+def parseImage(imageStr):
+    imageArr = imageStr.split(", ")
+    
+    return imageArr
+
+#takes in the array of IMAGE_LIST and will turn it into a string that
+#  is saved into the database, and is parsed by parseImage
+def translateImage(imageArr):
+    imageStr = ""
+    for i in range(len(imageArr)):
+        if i == len(imageArr) - 1:
+            imageStr += imageArr[i]
+        else:
+            imageStr += imageArr[i] + ", "
+        
+    return imageStr
+
+print(parseText("this is caption 1 ### this is caption 2 ###"))
+print(translateText(['this is caption 1', 'this is caption 2']))
+
+print(parseImage("test1, test2"))
+print(translateImage(['test1', 'test2']))
 
 
 @app.route("/")
@@ -63,10 +109,10 @@ def query_story():
     response = cursor.execute("SELECT TEXT_CAPTIONS FROM Story, Text WHERE STORY.STORY_ID = \"%s\" AND TEXT.STORY_ID = \"%s\"" % (sID, sID))
     #connection.close()
     # todo querying the database via POST request
-  
-
+    response = response.fetchall()
+    result = parseText(response[0][0])
     # return render_template("storyResult.html", name = name, age_group = age_group, gender = gender, treatment = treatment, response = response.fetchall())
-    return render_template("readStories.html", response = response.fetchall())
+    return render_template("readStories.html", response = result)
 
 # Gain access to db
 def get_database():
@@ -75,17 +121,19 @@ def get_database():
         database = Flask._database = sqlite3.connect(DATABASE)
 
 #Need to figure out img list for method signature ------------------->
-def insertVaribleIntoTable(name, age, gender, story_ID, type_of_visit):
+
+def insertVaribleIntoTable(name, age, gender, story_ID, type_of_visit, img_list):
     try:
-        sqliteConnection = sqlite3.connect('c4gDataBase.db')
+        sqliteConnection = sqlite3.connect("c4gDataBase.db")
         cursor = sqliteConnection.cursor()
         print("Connected to SQLite")
 
-        sqlite_insert_with_param = "INSERT INTO Story (NAME, AGE, GENDER, STORY_ID, TYPE_OF_VISIT, IMAGE_LIST), VALUES (\"%s\", \"%d\", \"%d\", \"%s\", \"%s\", \"%s\")" % (name, age, gender, story_ID, type_of_visit, img_list)
+        sqlite_insert_with_param = """INSERT INTO Story(NAME, AGE, GENDER, STORY_ID, TYPE_OF_VISIT, IMAGE_LIST) VALUES (\"%s\", \"%d\", \"%s\", \"%s\", \"%s\", \"%s\")""" % (name, age, gender, story_ID, type_of_visit, img_list)
 
-        data_tuple = (name, age, gender, story_ID, type_of_visit)
+        data_tuple = (name, age, gender, story_ID, type_of_visit, img_list)
         cursor.execute(sqlite_insert_with_param, data_tuple)
         sqliteConnection.commit()
+        
         print("Python Variables inserted successfully into SqliteDb_developers table")
 
         cursor.close()
@@ -97,7 +145,9 @@ def insertVaribleIntoTable(name, age, gender, story_ID, type_of_visit):
             sqliteConnection.close()
             print("The SQLite connection is closed")
 
-insertVaribleIntoTable('Joe', 15, 'Male', 'Joe150', "ER")
+    return render_template("home.html")
+
+#insertVaribleIntoTable('Joe', 15, 'Male', 'Joe150', "ER", ["test"])
 
 
 @app.teardown_appcontext
@@ -106,6 +156,17 @@ def close_database(exception):
     if database is not None:
         database.close()
 
+@app.teardown_request
+def teardown_request(exception=None):
+    print("this runs after request")
+
+def redirect_url():
+    return request.args.get('next') or \
+        request.referrer or \
+        url_for('index')
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
