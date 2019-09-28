@@ -74,8 +74,8 @@ def get_database():
     if database is None:
         database = Flask._database = sqlite3.connect(DATABASE)
 
-
-def insertVaribleIntoTable(name, age, gender, story_ID, type_of_visit, img_list):
+#Need to figure out img list for method signature ------------------->
+def insertVaribleIntoTable(name, age, gender, story_ID, type_of_visit):
     try:
         sqliteConnection = sqlite3.connect('c4gDataBase.db')
         cursor = sqliteConnection.cursor()
