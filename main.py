@@ -17,7 +17,7 @@ def create_stories():
 
 @app.route("/view")
 def view_stories():
-    return render_template("view_stories.html")  # todo possible html path
+    return render_template("findStories.html")  # todo possible html path
 
 
 # Gain access to db
