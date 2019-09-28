@@ -1,7 +1,7 @@
-<% extends "layout.html" %>
-
+{% extends "layout.html" %}
+{% block content %}
 <div class='col-sm-5'>
-    <form method="POST" action="/auth/login">
+    <form method="POST" action="/login">
         <div class="form-group">
             <label class="sr-only" for="email">Email</label>
             <input class='form-control' type="text" id="email" name="email" maxlength="255" placeholder="Email or Username" />
@@ -18,5 +18,6 @@
             </button>
         </div>
     </form>
-    <p>Don't have an account yet? <a href='/auth/register'>Register here</a>.</p>
+    <p>Don't have an account yet? <a href='/register'>Register here</a>.</p>
 </div>
+{% endblock content %}
