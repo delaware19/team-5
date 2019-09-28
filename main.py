@@ -26,6 +26,11 @@ def find_stories():
     return render_template("findStories.html")
 
 
+@app.route("/read")
+def read_stories():
+    return render_template("readStories.html")
+
+
 @app.route("/story", methods=["POST"])
 def query_story():
     # todo querying the database via POST request
