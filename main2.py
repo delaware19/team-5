@@ -2,7 +2,6 @@ import sqlite3
 from flask import Flask, render_template, request
 import werkzeug
 from flask import g
-import sqlite3
 
 DATABASE = '/Users/ryan_emenheiser/Desktop/CodeForGood/team-5/c4gDataBase.db'
 app = Flask(__name__)
@@ -52,17 +51,28 @@ def query_story():
     age_group = request.form["Age Group"]
     gender = request.form["Gender"]
     treatment = request.form["Treatment"]
-    sql_command = """
-    SELECT TEXT_CAPTION
-    FROM Story, Text WHERE STORY.STORY_ID = '"+name+"' AND TEXT.STORY_ID = '"+name+"';
-    """
-    response = cursor.execute(sql_command)
+
+
+    sID = name + age_group[0]
+    if gender.upper() == "MALE":
+        sID += "0"
+    elif gender.upper() == "FEMALE":
+        sID += "1"
+    else:
+        sID += "2"
+    
+    # sql_command = """
+    # SELECT TEXT_CAPTIONS
+    # FROM Story, Text WHERE STORY.STORY_ID = '"+sID+"' AND TEXT.STORY_ID = '"+sID+"';
+    # """
+    # response = cursor.execute(sql_command)
+    response = cursor.execute("SELECT TEXT_CAPTIONS FROM Story, Text WHERE STORY.STORY_ID = \"%s\" AND TEXT.STORY_ID = \"%s\"" % (sID, sID))
     #connection.close()
     # todo querying the database via POST request
   
 
-    return render_template("storyResult.html", name = name, age_group = age_group, gender = gender, treatment = treatment, response = response.fetchall())
-
+    # return render_template("storyResult.html", name = name, age_group = age_group, gender = gender, treatment = treatment, response = response.fetchall())
+    return render_template("readStories.html", response = response.fetchall())
 
 # Gain access to db
 def get_database():
