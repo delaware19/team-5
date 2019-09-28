@@ -1,9 +1,20 @@
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask import g
+import sqlite3
 
 DATABASE = '/Users/ryan_emenheiser/Desktop/CodeForGood/team-5/c4gDataBase.db'
 app = Flask(__name__)
+connection = sqlite3.connect("c4gDataBase.db")
+cursor = connection.cursor()
+
+# sql_command = """
+# SELECT *
+# FROM Story, Text WHERE STORY.STORY_ID = "Ryan210";
+# """
+# response = cursor.execute(sql_command)
+# print(response)
+# connection.close()
 
 
 @app.route("/")
@@ -33,8 +44,23 @@ def read_stories():
 
 @app.route("/story", methods=["POST"])
 def query_story():
+
+    connection = sqlite3.connect("c4gDataBase.db")
+    cursor = connection.cursor()
+
+    sql_command = """
+    SELECT *
+    FROM Story, Text WHERE STORY.STORY_ID = "Ryan40";
+    """
+    response = cursor.execute(sql_command)
+    #connection.close()
     # todo querying the database via POST request
-    return render_template("story.html", story='database_story')
+    name = request.form["Name"]
+    age_group = request.form["Age Group"]
+    gender = request.form["Gender"]
+    treatment = request.form["Treatment"]
+
+    return render_template("storyResult.html", name = name, age_group = age_group, gender = gender, treatment = treatment, response = response.fetchall())
 
 
 # Gain access to db

@@ -1,40 +1,26 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<form>
-  <div class="form-group">
-    <label for="Name">Name</label>
-    <input type="Name" class="form-control" id="Name" placeholder="Joe Smith">
-  </div>
-  <div class="form-group">
-    <label for="Gender">Gender</label>
-    <select class="Gender" id="Gender">
+<form action="{{ url_for('query_story') }}" method="post">
+    <input type="text" name="Name">
+    <select name="Age Group">
+      <option>0-4</option>
+      <option>5-12</option>
+      <option>12-15</option>
+      <option>16+</option>
+    </select>
+    <select name="Gender">
       <option>Male</option>
       <option>Female</option>
       <option>Other</option>
     </select>
-  </div>
-  <div class="form-group">
-    <label for="Treatment"> Treatment </label>
-    <select multiple class="form-control" id="Treatment">
+    <select name="Treatment">
       <option>X-Ray</option>
+      <option>Check-in</option>
       <option>Blood Work</option>
-      <option>Check in</option>
-      <option>ER</option>
-      <option>Other</option>
+      <option>Whatever else..</option>
     </select>
-  </div>
-  <div class="form-group">
-    <label for="Age Group">Age Group</label>
-    <select multiple class="form-control" id="Age Group">
-      <option>0-4</option>
-      <option>5-15</option>
-      <option>15+</option>
-    </select>
-  </div>
-  <form method="POST" action="/story">
-    <button type="button" class="btn btn-primary"> Find Stories </button>
-  </form>
+    <input type="submit">
 
 </form>
 
