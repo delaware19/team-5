@@ -15,9 +15,14 @@ def create_stories():
     return render_template("admin_create_story.html")  # todo possible html path for creating admin stories
 
 
+@app.route("/login")
+def login():
+    return render_template("login.html", login = "login")
+
+
 @app.route("/view")
 def view_stories():
-    return render_template("view_stories.html")  # todo possible html path
+    return render_template("findStories.html")  # todo possible html path
 
 
 # Gain access to db
