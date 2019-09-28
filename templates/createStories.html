@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- ADMIN PAGE -->
+<form>
+  <div class="form-group">
+    <label for="Name">Name</label>
+    <input type="Name" class="form-control" id="Name" placeholder="Joe Smith">
+  </div>
+  <div class="form-group">
+    <label for="Gender">Gender</label>
+    <select class="Gender" id="Gender">
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="Treatment"> Treatment </label>
+    <select multiple class="form-control" id="Treatment">
+      <option>X-Ray</option>
+      <option>Blood Work</option>
+      <option>Check in</option>
+      <option>ER</option>
+      <option>Other</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="Age Group">Age Group</label>
+    <select multiple class="form-control" id="Age Group">
+      <option>0-4</option>
+      <option>5-15</option>
+      <option>15+</option>
+    </select>
+  </div>
+  <button type="button" class="btn btn-primary"> Create Story </button>
+</form>
+
+{% endblock content %}
