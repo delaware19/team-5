@@ -15,7 +15,7 @@ cursor = connection.cursor()
 #  that can be traversed for each of the story "pages" to put the correct
 #  text per story "page"
 def parseText(textStr):
-    textArr = textStr.split(" ### ")
+    textArr = textStr.split("###")
     
     return textArr
 
@@ -24,7 +24,7 @@ def parseText(textStr):
 def translateText(textArr):
     textStr = ""
     for i in range(len(textArr)):
-        textStr += str(textArr[i]) + " ### "
+        textStr += str(textArr[i]) + "###"
         
     return textStr
 
