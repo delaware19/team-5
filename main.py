@@ -1,13 +1,17 @@
 import sqlite3
-from flask import Flask
+from flask import Flask, render_template
 
 DATABASE = '/path/to/database.db'
-
 app = Flask(__name__)
 
-@app.route("/")
-def hello():
-    return "Hello World!"
+
+@app.route("/home")
+def home():
+
+    return render_template("home.html", title = "Home Page")
+
+
+
 
 #Gain access to db
 def get_database():
