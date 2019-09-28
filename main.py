@@ -13,10 +13,10 @@ def home():
 
 @app.route("/create/stories")
 def create_stories():
-    return render_template("admin_create_story.html")  # todo possible html path for creating admin stories
+    return render_template("createStories.html")  # todo possible html path for creating admin stories
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/login")
 def login():
     return render_template("login.html", login="login")
 
