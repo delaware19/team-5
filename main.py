@@ -1,5 +1,6 @@
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import werkzeug
 from flask import g
 
 DATABASE = '/Users/ryan_emenheiser/Desktop/CodeForGood/team-5/c4gDataBase.db'
@@ -29,6 +30,14 @@ def find_stories():
 @app.route("/read")
 def read_stories():
     return render_template("readStories.html")
+
+# for uploading an image from the admin's gallery
+@app.route('/uploader', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['file']
+        f.save(werkzeug.secure_filename(f.filename))
+        return 'file uploaded successfully'
 
 
 @app.route("/story", methods=["POST"])
