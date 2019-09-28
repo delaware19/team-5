@@ -98,7 +98,6 @@ def query_story():
     gender = request.form["Gender"]
     treatment = request.form["Treatment"]
 
-
     sID = name + age_group[0]
     if gender.upper() == "MALE":
         sID += "0"
@@ -128,10 +127,10 @@ def insertVaribleIntoTable(name, age, gender, story_ID, type_of_visit, img_list)
         cursor = sqliteConnection.cursor()
         print("Connected to SQLite")
 
-        sqlite_insert_with_param = """INSERT INTO Story(NAME, AGE, GENDER, STORY_ID, TYPE_OF_VISIT, IMAGE_LIST) VALUES (\"%s\", \"%d\", \"%s\", \"%s\", \"%s\", \"%s\")""" % (name, age, gender, story_ID, type_of_visit, img_list)
+        sqlite_insert_with_param = cursor.execute("INSERT INTO Story(NAME, AGE, GENDER, STORY_ID, TYPE_OF_VISIT, IMAGE_LIST) VALUES (\"%s\", \"%d\", \"%s\", \"%s\", \"%s\", \"%s\")" % (name, age, gender, story_ID, type_of_visit, img_list))
 
         data_tuple = (name, age, gender, story_ID, type_of_visit, img_list)
-        cursor.execute(sqlite_insert_with_param, data_tuple)
+        #cursor.execute(sqlite_insert_with_param, data_tuple)
         sqliteConnection.commit()
         
         print("Python Variables inserted successfully into SqliteDb_developers table")
@@ -147,7 +146,7 @@ def insertVaribleIntoTable(name, age, gender, story_ID, type_of_visit, img_list)
 
     return render_template("home.html")
 
-#insertVaribleIntoTable('Joe', 15, 'Male', 'Joe150', "ER", ["test"])
+insertVaribleIntoTable('Joe', 15, 'Male', 'Joe150', "ER", ["test"])
 
 
 @app.teardown_appcontext
